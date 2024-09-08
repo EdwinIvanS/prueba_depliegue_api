@@ -58,9 +58,7 @@ describe("Method GET", () => {
         const response = await request(app).get('/users/find').send();
         expect(response.status).toBe(200);
     });
-
   });
-
   describe("test fail cases get", () => {
     const id = '66de1c1b31fc003315e7fa91';
     it('should return status 404 users by id', async () => {
@@ -84,9 +82,7 @@ describe("Method PUT", () => {
             expect(response.status).toBe(200);
         });
     })
-
 })
-
 describe('Method DELETE', () => {
     describe('Response exit', () => {
         it('should delete user', async () => {
