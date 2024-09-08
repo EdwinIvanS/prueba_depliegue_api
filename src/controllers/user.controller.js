@@ -32,7 +32,17 @@ const userController = {
         res.status(500).json({ message: "Error querying user" });
     }
   },
-  update: (req, res) => {},
+  update: async (req, res) => {    
+    try {
+        const userUpdate = await User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+          });
+          if(userUpdate) return res.status(200).json(userUpdate);
+          else return res.status(404).json({ message: "User not found" });
+    } catch (error) {
+        return res.status(500).json({ message: "Error updated user" });
+    }
+  },
   delete: (req, res) => {},
 };
 
