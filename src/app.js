@@ -1,8 +1,10 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const db = require('./database/config/config');
 
 var usersRouter = require('./routes/users');
 
@@ -38,8 +40,11 @@ app.use(function(err, req, res, next) {
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+db.on('open', () => {
+  console.log('Base de datos conectada, iniciando la aplicación...');
+  app.listen(port, () => {
+    console.log(`Aplicación escuchando en el puerto ${port}`);
+  });
 });
 
 module.exports = app;
