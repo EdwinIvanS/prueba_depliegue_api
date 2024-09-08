@@ -20,7 +20,7 @@ const userController = {
         if (!users) return res.status(404).json({ message: "User not found" });
         return res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({ message: "Error querying user" });
+        return res.status(500).json({ message: "Error querying user" });
     }
   },
   findAll: async(req, res) => {
