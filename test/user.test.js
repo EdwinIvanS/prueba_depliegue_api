@@ -47,7 +47,7 @@ describe("Method POST", () => {
   });
 });
 
-describe("MethoD GET", () => {
+describe("Method GET", () => {
   describe('test successfull cases get', () => {
     const id = '66de1c1b31fc003315e7fa90';
     it('should return user by id', async () => {
@@ -61,7 +61,7 @@ describe("MethoD GET", () => {
 
   });
 
-  describe("test successfull cases get", () => {
+  describe("test fail cases get", () => {
     const id = '66de1c1b31fc003315e7fa91';
     it('should return status 404 users by id', async () => {
         const response = await request(app).get(`/users/find/${id}`).send();
@@ -70,3 +70,19 @@ describe("MethoD GET", () => {
     });
   });
 });
+
+describe("Method PUT", () => {
+    describe("should return status 200", () => {
+        const userUpdate = {
+            username: "Juan",
+            email: "testUser@test.com",
+            password: "123prueba",
+        }
+        const id = "66de1c1b31fc003315e7fa90";
+        it('should update user', async () => {
+            const response = await request(app).put(`/users/update/${id}`).send();
+            expect(response.status).toBe(200);
+        });
+    })
+
+})
