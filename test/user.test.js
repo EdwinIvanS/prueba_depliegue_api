@@ -86,3 +86,20 @@ describe("Method PUT", () => {
     })
 
 })
+
+describe('Method DELETE', () => {
+    describe('Response exit', () => {
+        it('should delete user', async () => {
+            const response = await request(app).delete('/api/v1/user/66da5e18b26e7b7e9c84f061');
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty('message', 'User deleted');
+        });
+    });
+    describe('Response fail', () => {
+        it('should return 404 if user not found', async () => {
+            const response = await request(app).delete('/api/v1/user/66d8fa6fd1058d33b4e79741');
+            expect(response.status).toBe(404);
+            expect(response.body).toHaveProperty('message', 'User not found');
+        });
+    });
+})
