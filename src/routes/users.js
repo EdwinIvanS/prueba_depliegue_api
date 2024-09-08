@@ -9,5 +9,4 @@ router.get('/find/:id', controller.find);
 router.put('/update/:id', controller.update);
 router.delete('/delete/:id', controller.delete);
 
-
 module.exports = router;
