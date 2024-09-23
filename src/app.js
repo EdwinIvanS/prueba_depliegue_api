@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const db = require('./database/config/config');
-
+const { swaggerUi, swaggerDocs } = require('./config/swagger');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -21,6 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,6 +43,7 @@ const port = process.env.PORT || 3000;
 
 db.on('open', () => {
   console.log('Base de datos conectada, iniciando la aplicación...');
+  console.log('Documentación disponible en http://localhost:3000/api-docs');
   app.listen(port, () => {
     console.log(`Aplicación escuchando en el puerto ${port}`);
   });
